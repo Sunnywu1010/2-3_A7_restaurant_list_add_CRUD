@@ -71,30 +71,10 @@ router.get("/:restaurants_id", (req, res) => {
     .catch((error) => console.log(error));
 });
 
+// create restaurant
 router.post("/", (req, res) => {
-  const {
-    name,
-    name_en,
-    category,
-    image,
-    location,
-    phone,
-    google_map,
-    rating,
-    description,
-  } = req.body;
   restaurantList
-    .create({
-      name,
-      name_en,
-      category,
-      image,
-      location,
-      phone,
-      google_map,
-      rating,
-      description,
-    })
+    .create(req.body)
     .then(() => res.redirect("/"))
     .catch((error) => console.log(error));
 });
