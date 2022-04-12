@@ -10,7 +10,6 @@ router.get("/search", (req, res) => {
     .find({ $or: [{ name: keyword }, { category: keyword }] })
     .lean()
     .then((restaurants) => {
-      console.log(restaurants);
       res.render("index", { restaurants, keyword });
     });
 });
