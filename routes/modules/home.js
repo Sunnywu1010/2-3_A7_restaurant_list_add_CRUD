@@ -7,7 +7,15 @@ router.get("/search", (req, res) => {
   const keyword = req.query.keyword;
   // find()
   restaurantList
-    .find({ $or: [{ name: keyword }, { category: keyword }] })
+    // $or: find name or category
+    // $regex: any target matches "keyword"
+    // $options:"$i": Case insensitivity to match upper and lower cases
+    .find({
+      $or: [
+        { name: { $regex: keyword, $options: "$i" } },
+        { category: { $regex: keyword, $options: "$i" } },
+      ],
+    })
     .lean()
     .then((restaurants) => {
       res.render("index", { restaurants, keyword });
